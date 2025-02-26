@@ -2,72 +2,241 @@
   "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
   "organizeImports": {
     "enabled": true
+    // Helps with Rule 8: Limited Preprocessor Use by keeping imports organized
+    // In JavaScript/TypeScript, imports are analogous to #include in C
+    // Organizing imports helps maintain clear dependency structure
   },
   "linter": {
     "enabled": true,
     "rules": {
+      // Enable all recommended rules as a baseline for Rule 10: Zero Warnings
+      // NASA Rule 10 requires zero warnings from day one of development
       "recommended": true,
       "complexity": {
-        "noExcessiveCognitiveComplexity": "error",
-        "noVoid": "error",
-        "noBannedTypes": "error",
-        "noForEach": "error",
-        "noStaticOnlyClass": "error",
-        "noUselessConstructor": "error",
-        "useSimplifiedLogicExpression": "error"
+        // Rule 1: Simple Control Flow - Avoid complex logic structures
+        // NASA stipulates no goto, setjmp/longjmp, or recursion
+        // JS has no goto, but we can limit complexity in other ways
+        "noExcessiveCognitiveComplexity": "error", 
+        
+        // Rule 7: Check Return Values - Avoid void which can hide return checking
+        // NASA requires checking all return values; void can mask this requirement
+        "noVoid": "error", 
+        
+        // Rule 9: Pointer Restrictions - Ban complex types (TypeScript)
+        // NASA limits pointers to one level of dereferencing
+        // In TS, this means avoiding any, unknown, and nested generics
+        "noBannedTypes": "error", 
+        
+        // Rule 2: Fixed Loop Bounds - Prefer explicit iteration with bounds
+        // NASA requires statically provable loop bounds
+        // forEach can hide loop termination conditions
+        "noForEach": "error", 
+        
+        // Rule 6: Data Scope - Encourage proper encapsulation
+        // NASA requires smallest possible scope for data objects
+        // Static-only classes often indicate poor encapsulation
+        "noStaticOnlyClass": "error", 
+        
+        // Rule 4: Function Size Limit - Indirectly discourages complex constructors
+        // NASA limits functions to 60 lines (one printed page)
+        // Useless constructors add unnecessary complexity
+        "noUselessConstructor": "error", 
+        
+        // Rule 1: Simple Control Flow - Make logic expressions straightforward
+        // NASA emphasizes simple control flow for verification
+        // Complex logical expressions hinder code understanding
+        "useSimplifiedLogicExpression": "error" 
       },
       "correctness": {
-        "noUndeclaredVariables": "error",
-        "noUnusedVariables": "error",
-        "useHookAtTopLevel": "error"
+        // Rule 6: Data Scope - Ensure all variables are properly declared
+        // NASA requires smallest possible scope for all data objects
+        // Undeclared variables effectively have global scope - the worst case
+        "noUndeclaredVariables": "error", 
+        
+        // Rule 6: Data Scope - Avoid unused variables which pollute scope
+        // NASA emphasizes clean, minimal scope
+        // Unused variables indicate scope larger than necessary
+        "noUnusedVariables": "error", 
+        
+        // Rule 1: Simple Control Flow - Keep hooks at top level for predictable flow
+        // NASA requires simple, verifiable control flow
+        // React hooks have specific rules that maintain predictable execution
+        "useHookAtTopLevel": "error" 
       },
       "style": {
-        "noImplicitBoolean": "error",
-        "noNegationElse": "error",
-        "useConst": "error",
-        "noParameterAssign": "error",
-        "noUselessElse": "error"
+        // Rule 5: Assertions - Encourage explicit boolean expressions
+        // NASA requires 2+ assertions per function
+        // Explicit booleans make assertions more transparent
+        "noImplicitBoolean": "error", 
+        
+        // Rule 1: Simple Control Flow - Simplify conditional structures
+        // NASA emphasizes verifiable control flow
+        // Double negations make code harder to reason about
+        "noNegationElse": "error", 
+        
+        // Rule 6: Data Scope - Use const for values that shouldn't change
+        // NASA requires limiting variable scope and mutation
+        // const provides compile-time guarantees against reassignment
+        "useConst": "error", 
+        
+        // Rule 7: Check Return Values - Prevent parameter mutation which can hide results
+        // NASA requires validating parameters and checking return values
+        // Parameter reassignment can hide validation failures
+        "noParameterAssign": "error", 
+        
+        // Rule 1: Simple Control Flow - Eliminate unnecessary branches
+        // NASA restricts control flow to simple constructs
+        // Useless else blocks add unnecessary complexity
+        "noUselessElse": "error" 
       },
       "suspicious": {
-        "noConsoleLog": "error",
-        "noExplicitAny": "error",
-        "noRedundantUseStrict": "error",
-        "noShadowRestrictedNames": "error",
-        "noAssignInExpressions": "error"
+        // Rule 10: Compiler Warnings - Remove debug code in production
+        // NASA requires zero warnings and comprehensive analysis
+        // console.log is often forgotten debug code
+        "noConsoleLog": "error", 
+        
+        // Rule 9: Pointer Restrictions - Prevent the TypeScript equivalent of void*
+        // NASA limits pointers to one level of dereferencing
+        // 'any' type bypasses TypeScript's type system completely
+        "noExplicitAny": "error", 
+        
+        // Rule 8: Limited Preprocessor Use - Avoid redundant directives
+        // NASA limits preprocessor usage to headers and simple macros
+        // Redundant directives add unnecessary complexity
+        "noRedundantUseStrict": "error", 
+        
+        // Rule 6: Data Scope - Prevent shadowing important built-ins
+        // NASA requires clear, minimal scope for all variables
+        // Shadowing built-ins leads to confusing code and subtle bugs
+        "noShadowRestrictedNames": "error", 
+        
+        // Rule 6: Data Scope - Keep assignments out of expressions for clarity
+        // NASA emphasizes clear, verifiable code
+        // Assignments in expressions often hide side effects
+        "noAssignInExpressions": "error" 
       },
       "performance": {
-        "noDelete": "error"
+        // Rule 3: No Dynamic Memory Allocation - Avoid dynamic property deletion
+        // NASA forbids dynamic memory allocation after initialization
+        // In JS, 'delete' operator has unpredictable performance characteristics
+        "noDelete": "error" 
       }
     }
   },
+  // Rule 4: Function Size Limit - Format code for readability with reasonable limits
+  // NASA limits functions to what fits on a single printed page
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 80,
+    // 80 columns corresponds to NASA's "single sheet of paper" guideline
+    // This helps enforce the spirit of Rule 4
+    "lineWidth": 80, 
     "ignore": []
   },
   "javascript": {
     "formatter": {
+      // Consistent style helps with Rule 10: Static Analysis
+      // NASA requires code to pass strict static analysis
+      // Consistent formatting improves analyzer effectiveness
       "quoteStyle": "double",
       "trailingComma": "all",
       "semicolons": "always"
     },
     "parser": {
+      // Restrict unsafe features - supports Rule 9: Restricted Language Features
+      // NASA restricts language features that complicate analysis
+      // Unsafe parameter decorators can lead to hard-to-analyze code
       "unsafeParameterDecoratorsEnabled": false
     }
   },
   "json": {
     "parser": {
+      // Allow comments in JSON for documentation - helps with Rule 7 justifications
+      // NASA requires justification when ignoring return values
+      // Comments in JSON configuration allow documenting such exceptions
       "allowComments": true
     },
     "formatter": {
       "enabled": true
     }
   },
+  // Custom settings to implement NASA rules not directly covered by standard rules
   "files": {
-    "maxSize": 500,
+    // Rule 4: Function Size Limit - Encourage smaller files which typically have smaller functions
+    // NASA's 60-line function limit is easier to maintain in smaller files
+    "maxSize": 500, 
     "ignoreUnknown": true,
-    "ignore": ["node_modules", "dist", "build", ".git"]
+    "ignore": [
+      // Ignore third-party code which we can't control
+      // NASA Rule 10 applies to your code, not dependencies
+      "node_modules", 
+      "dist", 
+      "build", 
+      ".git"
+    ]
   }
+  
+  // ADDITIONAL NASA RULE IMPLEMENTATION NOTES:
+  
+  // RULE 1: SIMPLE CONTROL FLOW
+  // While Biome catches many complexity issues, consider additional rules:
+  // - ESLint's complexity rule to limit cyclomatic complexity
+  // - A custom rule to detect potential recursion (direct or indirect)
+  // - Consider prohibiting Promise chains longer than 2-3 levels
+  
+  // RULE 2: FIXED LOOP BOUNDS
+  // Biome can't fully verify statically provable loop bounds. Consider:
+  // - Custom ESLint rule to verify for/while loops have explicit termination conditions
+  // - Runtime assertions that enforce maximum iterations
+  // - Code reviews to verify all loops have a clear upper bound
+  
+  // RULE 3: NO DYNAMIC MEMORY ALLOCATION
+  // JavaScript handles memory automatically, but you can still enforce:
+  // - Prohibit creating large arrays/objects after initialization
+  // - Add ESLint rules against Array.prototype.push in performance-critical code
+  // - Consider memory profiling in your CI/CD pipeline
+  
+  // RULE 4: FUNCTION SIZE LIMIT
+  // Add a custom ESLint rule or use eslint-plugin-sonarjs to enforce:
+  // - Maximum 60 lines per function
+  // - Maximum parameter count (e.g., 5-7 parameters)
+  // - Max complexity metrics per function
+  
+  // RULE 5: ASSERTIONS
+  // Biome doesn't count assertions. Consider:
+  // - Custom ESLint rule to enforce minimum assertions per function
+  // - TypeScript pre/post condition libraries
+  // - Runtime invariant checking systems
+  
+  // RULE 6: DATA SCOPE
+  // Fully covered by multiple Biome rules, but also consider:
+  // - TypeScript's strict mode (especially strictPropertyInitialization)
+  // - ESLint's no-var rule to prevent function-scoped variables
+  
+  // RULE 7: CHECK RETURN VALUES
+  // Consider additional enforcement:
+  // - Custom ESLint rule to check that Promise results are always handled
+  // - TypeScript's strict null checking
+  // - Code reviews specifically focused on error handling
+  
+  // RULE 8: LIMITED PREPROCESSOR USE
+  // JavaScript has no preprocessor, but similar concerns apply to:
+  // - Babel/TypeScript transformations
+  // - Complex webpack configurations
+  // - Consider linting your build configuration files too
+  
+  // RULE 9: POINTER RESTRICTIONS
+  // In TypeScript, similar problems appear in:
+  // - Excessive type casting
+  // - Generic type complexity
+  // - Use of Record<string, any> (analogous to void*)
+  // Consider custom type complexity metrics
+  
+  // RULE 10: COMPILER WARNINGS AND STATIC ANALYSIS
+  // Fully implement with:
+  // - CI/CD integration that fails on any Biome warning
+  // - Multiple static analyzers (Biome + ESLint + TypeScript)
+  // - SonarQube or similar for deeper code quality metrics
+  // - Consider automated code reviews
 } 
