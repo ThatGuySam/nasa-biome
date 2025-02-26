@@ -1,0 +1,73 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "error",
+        "noVoid": "error",
+        "noBannedTypes": "error",
+        "noForEach": "error",
+        "noStaticOnlyClass": "error",
+        "noUselessConstructor": "error",
+        "useSimplifiedLogicExpression": "error"
+      },
+      "correctness": {
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error",
+        "useHookAtTopLevel": "error"
+      },
+      "style": {
+        "noImplicitBoolean": "error",
+        "noNegationElse": "error",
+        "useConst": "error",
+        "noParameterAssign": "error",
+        "noUselessElse": "error"
+      },
+      "suspicious": {
+        "noConsoleLog": "error",
+        "noExplicitAny": "error",
+        "noRedundantUseStrict": "error",
+        "noShadowRestrictedNames": "error",
+        "noAssignInExpressions": "error"
+      },
+      "performance": {
+        "noDelete": "error"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "ignore": []
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "trailingComma": "all",
+      "semicolons": "always"
+    },
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": false
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
+    },
+    "formatter": {
+      "enabled": true
+    }
+  },
+  "files": {
+    "maxSize": 500,
+    "ignoreUnknown": true,
+    "ignore": ["node_modules", "dist", "build", ".git"]
+  }
+} 
